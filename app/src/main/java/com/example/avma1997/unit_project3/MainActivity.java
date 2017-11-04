@@ -56,6 +56,9 @@ View bottomSheet;
             }
         });
         mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+        mBottomSheetBehavior.setHideable(true);
+        mBottomSheetBehavior.setPeekHeight(300);
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
     }
 
     @Override
