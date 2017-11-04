@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity
 TextView detailstextView;
 CircleImageView profileImageView;
 View bottomSheet;
+    DrawerLayout drawer;
     private BottomSheetBehavior mBottomSheetBehavior;
 
     @Override
@@ -32,7 +33,7 @@ View bottomSheet;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bottomSheet = findViewById( R.id.bottom_sheet );
-
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
        detailstextView=findViewById(R.id.details_textview);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -40,19 +41,20 @@ View bottomSheet;
 
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
       profileImageView= navigationView.getHeaderView(0).findViewById(R.id.profile_imageview);
         navigationView.setNavigationItemSelectedListener(this);
         profileImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                drawer.closeDrawer(GravityCompat.START);
             }
         });
         mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
@@ -116,7 +118,7 @@ View bottomSheet;
             detailstextView.setText("You can Share The Images");
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
