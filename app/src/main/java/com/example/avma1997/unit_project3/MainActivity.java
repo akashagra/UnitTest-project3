@@ -1,6 +1,8 @@
 package com.example.avma1997.unit_project3;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity
 TextView detailstextView;
 CircleImageView profileImageView;
 View bottomSheet;
+TextView navtextView;
     DrawerLayout drawer;
     private BottomSheetBehavior mBottomSheetBehavior;
 
@@ -35,6 +38,8 @@ View bottomSheet;
         bottomSheet = findViewById( R.id.bottom_sheet );
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
        detailstextView=findViewById(R.id.details_textview);
+       navtextView=findViewById(R.id.navigation_textview);
+      navtextView.setText("This is Home");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -61,6 +66,25 @@ View bottomSheet;
         mBottomSheetBehavior.setHideable(true);
         mBottomSheetBehavior.setPeekHeight(300);
         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+                = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        navtextView.setText("This is Home");
+                        return true;
+                    case R.id.navigation_dashboard:
+                        navtextView.setText("This is Dashboard");
+                        return true;
+                    case R.id.navigation_notifications:
+                        navtextView.setText("This is Notifications");
+                        return true;
+                }
+                return false;
+            }
+        };
     }
 
     @Override
@@ -108,7 +132,7 @@ View bottomSheet;
             detailstextView.setText("Gallery: You can see the images Clicked By You");
 
         } else if (id == R.id.nav_slideshow) {
-            detailstextView.setText("Slideshow:You can see the slideshoe of the images clicked");
+            detailstextView.setText("Slideshow:You can see the slideshow of the images clicked");
 
         } else if (id == R.id.nav_manage) {
             detailstextView.setText("Manage:You can Manage the Images");
