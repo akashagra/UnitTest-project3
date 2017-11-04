@@ -81,10 +81,15 @@ TextView navtextView;
                     case R.id.navigation_notifications:
                         navtextView.setText("This is Notifications");
                         return true;
+                    case R.id.about_us:
+                        navtextView.setText("This is About Us");
+                       return true;
                 }
                 return false;
             }
         };
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
     @Override
